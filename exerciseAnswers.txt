@@ -1,3 +1,6 @@
+
+חלק ראשון--> ספריה
+
 1.
 Endpoint	Method	Description
 1/books     	GET	          קבלת רשימת ספרים
@@ -30,4 +33,52 @@ id-תעודת זהות חובה
 •	 email – חובה
 
 
+חלק שני---<מערכת תשלומים והזמנות
 
+1. אילו מחלקות ניצור?
+
+למערכת "Orders + Payments" נרצה לפחות את המחלקות הבאות:
+
+Order – מחלקת הזמנה
+
+Payment – מחלקת תשלום
+
+Customer – מחלקת לקוח (אופציונלי אבל חשוב למעקב)
+
+Product / Item – מחלקת מוצר או פריט שמוזמן
+
+OrderService – מחלקת שירות לניהול הזמנות
+
+PaymentService – מחלקת שירות לניהול תשלומים
+
+אפשר להוסיף מחלקות נוספות כמו Invoice, Shipping, Discount, תלוי ברמת המערכת.
+
+2. אחריות של כל מחלקה
+Class	Responsibility
+Order	מייצגת הזמנה: מכילה את רשימת הפריטים, מצב ההזמנה (Pending, Paid, Shipped), מזהה הזמנה ולקוח. אחראית על חישוב סכום ההזמנה.
+Payment	מייצגת תשלום: כוללת סכום, תאריך, סוג תשלום (כרטיס אשראי, PayPal), סטטוס (Pending, Completed).
+Customer	מידע על הלקוח: שם, אימייל, כתובת, רשימת הזמנות שלו.
+Product / Item	פריט במלאי: שם, מחיר, כמות זמינה, מזהה מוצר.
+OrderService	מחלקת Service שמטפלת ביצירת הזמנה, עדכון סטטוס, הוספת/הסרת פריטים.
+PaymentService	מחלקת Service שמטפלת בתשלומים: יצירת תשלום, אימות תשלום, עדכון סטטוס ההזמנה לאחר תשלום.
+3. איך לוודא שתשלום קשור להזמנה נכונה?
+
+כמה אופציות:ניתן לנקוט בחלק מהם או בכולן כדי לוודא אי שבירת מערכת
+
+קשר מזהה ייחודי בין Order ל-Payment
+
+כל Payment מכיל שדה orderId או הפניה (Order order).
+
+בעת יצירת תשלום, בודקים שה-orderId קיים במערכת וסטטוס ההזמנה מאפשר תשלום (למשל Pending).
+
+Business Rule בבדיקת PaymentService
+
+לפני שמעדכנים סטטוס של הזמנה ל-Paid, עושים בדיקה:
+
+if(payment.getOrder().getTotalAmount() == payment.getAmount()) {
+    order.setStatus(OrderStatus.PAID);
+}
+
+Transactional Integrity
+
+DB עם Transaction: אם תשלום נכשל, ההזמנה לא מתעדכנת.
