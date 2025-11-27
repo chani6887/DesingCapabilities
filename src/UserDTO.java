@@ -13,6 +13,10 @@ public class UserDTO {
         this.email = email;
         this.membershipDate = membershipDate;
     }
+    public UserDTO(Long id,String membershipDate) {
+        this.id = id;
+        this.membershipDate = membershipDate;
+    }
 
     // Getters & Setters
 }
