@@ -1,0 +1,32 @@
+1.
+Endpoint	Method	Description
+1/books     	GET	          קבלת רשימת ספרים
+/books/{id}	    GET	קבלת פרטי ספר ספציפי לפי ID
+/books	        POST	          הוספת ספר חדש
+/books/{id}	    PUT	עדכון ספר קיים
+/books/{id}	    DELETE	מחיקת ספר
+/users	        GET	קבלת רשימת משתמשים
+/users/{id}   	GET	פרטי משתמש ספציפי
+/users	        POST	יצירת משתמש חדש
+2.
+•	 GET /books – מחזיר רשימת ספרים, לדוגמה JSON עם כל הספרים.
+•	GET /books/{id} –  מחזיר פרטי ספר לפי מזהה.
+•	POST /books – יוצר ספר חדש. הנתונים מגיעים ב-Body בפורמט JSON.
+•	PUT /books/{id} –  מעדכן ספר קיים. גם כאן Body JSON.
+•	 DELETE /books/{id} – מוחק ספר.
+•	 GET /users – מחזיר רשימת משתמשים.
+•	POST /users – יוצר משתמש חדש.
+
+ חלק 3. נכתב בJAVA ראה קובץ.
+חלק 4:
+BookDTO
+•	title   חובה
+•	author  חובה
+•	 isbn  חובה
+•	available   ניתן לשים ברירת מחדל ל-true
+UserDTO
+•	 name – חובה
+•	 email – חובה
+
+
+
