@@ -25,6 +25,7 @@ BookDTO
 •	 isbn  חובה
 •	available   ניתן לשים ברירת מחדל ל-true
 UserDTO
+id-תעודת זהות חובה
 •	 name – חובה
 •	 email – חובה
 
