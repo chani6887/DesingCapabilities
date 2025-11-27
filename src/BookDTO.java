@@ -8,7 +8,9 @@ public class BookDTO {
 
         // Constructors, getters, setters
         public BookDTO() {}
-
+        public BookDTO(Long id){
+            this.id = id;
+        }
         public BookDTO(Long id, String title, String author, String isbn, int year, boolean available) {
             this.id = id;
             this.title = title;
